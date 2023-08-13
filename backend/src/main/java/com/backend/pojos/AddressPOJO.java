@@ -3,6 +3,7 @@ package com.backend.pojos;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class AddressPOJO {
     @Column(name = "pincode")
     private String pincode;
 
-    @ManyToMany(mappedBy = "addresses")
+    @ManyToMany(mappedBy = "addresses", cascade = CascadeType.ALL)
     private Set<UserPOJO> users = new HashSet<>();
 
 }
