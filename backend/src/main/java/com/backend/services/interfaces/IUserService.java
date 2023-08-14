@@ -1,4 +1,4 @@
-package com.backend.services;
+package com.backend.services.interfaces;
 
 import com.backend.pojos.UserPOJO;
 

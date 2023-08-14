@@ -1,24 +1,24 @@
 package com.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.pojos.UserPOJO;
-import com.backend.services.interfaces.IUserService;
+import com.backend.pojos.AddressPOJO;
+import com.backend.services.interfaces.IAddressService;
 
 @RestController
-@RequestMapping("/users")
-// @CrossOrigin(origins = "http://localhost:3000")
-public class UserController {
+@RequestMapping("/address")
+public class AddressController {
+
     @Autowired
-    private IUserService userService;
+    private IAddressService addressService;
 
     @PostMapping
-    public String addUser(@RequestBody UserPOJO user){
-        return userService.addUser(user);
+    public String addAddress(@RequestBody AddressPOJO address){
+        return addressService.addAddress(address);
     }
+
 }

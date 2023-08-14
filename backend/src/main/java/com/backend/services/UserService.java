@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.backend.daos.IAddressDao;
 import com.backend.daos.IUserDAO;
 import com.backend.pojos.UserPOJO;
+import com.backend.services.interfaces.IUserService;
 
 @Service
 @Transactional
@@ -13,6 +15,9 @@ public class UserService implements IUserService{
 
     @Autowired
     private IUserDAO userDAO;
+
+    @Autowired
+    private IAddressDao addressDao;
 
     @Override
     public String addUser(UserPOJO user) {
