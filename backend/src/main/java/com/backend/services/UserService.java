@@ -1,11 +1,15 @@
 package com.backend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.backend.converters.interfaces.IUserConverter;
 import com.backend.daos.IAddressDao;
 import com.backend.daos.IUserDAO;
+import com.backend.dtos.UserDTO;
 import com.backend.pojos.UserPOJO;
 import com.backend.services.interfaces.IUserService;
 
@@ -18,6 +22,9 @@ public class UserService implements IUserService{
 
     @Autowired
     private IAddressDao addressDao;
+
+    @Autowired
+    private IUserConverter userConverter;
 
     @Override
     public String addUser(UserPOJO user) {
@@ -36,5 +43,16 @@ public class UserService implements IUserService{
         }
         return message;
     }
+
+    @Override
+    public List<UserDTO> allUsers() {
+        return userConverter.pojoToDto(userDAO.findAll());
+    }
+    
+    @Override
+    public UserDTO userById(Long userId){
+        return userConverter.pojoToDto(userDAO.findById(userId).orElse(null));
+    }
+
     
 }
