@@ -21,6 +21,13 @@ import javax.persistence.Table;
 import com.backend.pojos.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class UserPOJO {
@@ -56,6 +63,11 @@ public class UserPOJO {
         return this.addresses.add(addressPOJO);
     }
 
+    public Boolean removeAddress(AddressPOJO addressPOJO){
+        addressPOJO.getUsers().remove(this);
+        return this.addresses.remove(addressPOJO);
+    }
+
     @Column(name = "reg_date")
     private LocalDate registeredDate = LocalDate.now();
 
@@ -67,9 +79,6 @@ public class UserPOJO {
 
     @Column(name = "is_present")
     private Boolean isPresent = true;
-
-    public UserPOJO() {
-    }
 
     public UserPOJO(String firstName, String lastName, UserRole role, String userEmail, String mobileNumber,
             Set<AddressPOJO> addresses, LocalDate registeredDate, String password, byte[] userImage, Boolean isPresent) {
@@ -85,97 +94,6 @@ public class UserPOJO {
         this.isPresent = isPresent;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRoles(UserRole role) {
-        this.role = role;
-    }
-
-    public Boolean getIsPresent() {
-        return isPresent;
-    }
-
-    public void setIsPresent(Boolean isPresent) {
-        this.isPresent = isPresent;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public Set<AddressPOJO> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<AddressPOJO> addresses) {
-        this.addresses = addresses;
-    }
-
-    public LocalDate getRegisteredDate() {
-        return registeredDate;
-    }
-
-    public void setRegisteredDate(LocalDate registeredDate) {
-        this.registeredDate = registeredDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public byte[] getUserImage() {
-        return userImage;
-    }
-
-    public void setUserImage(byte[] userImage) {
-        this.userImage = userImage;
-    }
 
     private String toStr() {
         return "UserPOJO [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role

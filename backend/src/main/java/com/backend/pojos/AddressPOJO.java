@@ -15,6 +15,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class AddressPOJO {
@@ -45,52 +52,19 @@ public class AddressPOJO {
         return this.users.add(userPOJO);
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Boolean removeUser(UserPOJO userPOJO){
+        userPOJO.getAddresses().remove(this);
+        return this.users.remove(userPOJO);
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    @Override
+    public String toString(){
+        return toStr();
     }
 
-    public String getAddressLine() {
-        return addressLine;
-    }
-
-    public void setAddressLine(String addressLine) {
-        this.addressLine = addressLine;
-    }
-
-    public String getLandmark() {
-        return landmark;
-    }
-
-    public void setLandmark(String landmark) {
-        this.landmark = landmark;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public Set<UserPOJO> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserPOJO> users) {
-        this.users = users;
+    private String toStr() {
+        return "AddressPOJO [addressId=" + addressId + ", addressLine=" + addressLine + ", landmark=" + landmark
+                + ", city=" + city + ", pincode=" + pincode + ", users=" + users + "]";
     }
 
     
