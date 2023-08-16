@@ -16,7 +16,6 @@ public class UserDTO {
     private UserRole role;
     private String userEmail;
     private String mobileNumber;
-    private List<Long> addressId;
     private String password;
     private byte[] userImage;
 }

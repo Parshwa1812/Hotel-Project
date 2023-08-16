@@ -23,7 +23,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-    public String addUser(@RequestBody UserPOJO user){
+    public UserPOJO addUser(@RequestBody UserDTO user){
         return userService.addUser(user);
     }
 

@@ -33,14 +33,12 @@ public class UserConverter implements IUserConverter{
         userPOJO.setMobileNumber(userDTO.getMobileNumber());
         userPOJO.setPassword(userDTO.getPassword());
         userPOJO.setUserImage(userDTO.getUserImage());
-        userPOJO.setAddresses(addressDAO.findAllById(userDTO.getAddressId()).stream().collect(Collectors.toSet()));
         return userPOJO;
     }
 
     @Override
     public List<UserPOJO> dtoToPojo(List<UserDTO> userDTOs) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dtoToPojo'");
+        return userDTOs.stream().map(x -> dtoToPojo(x)).collect(Collectors.toList());
     }
 
     @Override
@@ -54,8 +52,7 @@ public class UserConverter implements IUserConverter{
         userDTO.setMobileNumber(userPOJO.getMobileNumber());
         userDTO.setPassword(userPOJO.getPassword());
         userDTO.setUserImage(userPOJO.getUserImage());
-        userDTO.setAddressId(userPOJO.getAddresses().stream().map(AddressPOJO::getAddressId).collect(Collectors.toList()));
-
+        
         return userDTO;
     }
 

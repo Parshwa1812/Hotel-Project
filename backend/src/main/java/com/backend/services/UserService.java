@@ -27,7 +27,7 @@ public class UserService implements IUserService{
     private IUserConverter userConverter;
 
     @Override
-    public String addUser(UserPOJO user) {
+    public UserPOJO addUser(UserDTO user) {
         // StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
         // if(stackTrace.length >= 3){
@@ -36,12 +36,10 @@ public class UserService implements IUserService{
         //     System.out.println("in "+getClass() + ", "+currMethod.getMethodName());System.out.println("Called from "+ caller.getClassName() + ", "+caller.getMethodName());
         // }
         
-        String message = "User cannot be added";
-        UserPOJO persistedUser = userDAO.save(user);
-        if(null != persistedUser){
-            message = "User added successfully with user_id = "+persistedUser.getUserId() + " user_name = "+persistedUser.getFirstName()+" email = "+persistedUser.getUserEmail();
-        }
-        return message;
+        UserPOJO persistedUser = userConverter.dtoToPojo(user);
+        persistedUser = userDAO.save(persistedUser);
+        
+        return persistedUser;
     }
 
     @Override
