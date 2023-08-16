@@ -6,17 +6,22 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 import com.backend.pojos.enums.DiningVenueType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+//Parent Table for DiningTablePOJO
 
 @Setter
 @Getter
@@ -34,6 +39,7 @@ public class DiningVenuePOJO{
     private Long accomodationCount;
 
     @Column(name = "dining_venue_type")
+    @Enumerated(EnumType.STRING)
     private DiningVenueType diningVenueType;
 
     @OneToMany(mappedBy = "diningVenue", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -1,5 +1,9 @@
 package com.backend.pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.backend.pojos.enums.TableType;
@@ -16,6 +21,8 @@ import com.backend.pojos.enums.TableType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+//Child Table of DiningVenuePOJO
 
 @Getter
 @Setter
@@ -44,5 +51,8 @@ public class DiningTablePOJO{
 
     @Column(name = "room_image")
     private byte[] roomImage;
+
+    @OneToMany(mappedBy = "tableForRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TableReservationPOJO> reservedTables = new ArrayList<>();
 
 }

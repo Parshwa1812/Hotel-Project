@@ -1,7 +1,9 @@
 package com.backend.pojos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,10 +18,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.backend.pojos.enums.UserRole;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -80,19 +82,8 @@ public class UserPOJO {
     @Column(name = "is_present")
     private Boolean isPresent = true;
 
-    public UserPOJO(String firstName, String lastName, UserRole role, String userEmail, String mobileNumber,
-            Set<AddressPOJO> addresses, LocalDate registeredDate, String password, byte[] userImage, Boolean isPresent) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.userEmail = userEmail;
-        this.mobileNumber = mobileNumber;
-        this.addresses = addresses;
-        this.password = password;
-        this.userImage = userImage;
-        this.registeredDate = registeredDate;
-        this.isPresent = isPresent;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TableReservationPOJO> tableReservations = new ArrayList<>();
 
 
     private String toStr() {
