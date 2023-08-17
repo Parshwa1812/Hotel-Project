@@ -31,4 +31,5 @@ public class TableReservationPOJO {
     @ManyToOne
     @JoinColumn(name = "table_id")
     private DiningTablePOJO tableForRoom;
+
 }
