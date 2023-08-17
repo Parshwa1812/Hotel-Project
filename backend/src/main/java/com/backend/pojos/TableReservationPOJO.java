@@ -1,7 +1,13 @@
 package com.backend.pojos;
 
-import javax.persistence.Column;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,12 +30,15 @@ public class TableReservationPOJO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
 
+    private LocalDateTime startTime;
+    // private LocalDateTime endTime;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserPOJO user;
 
     @ManyToOne
     @JoinColumn(name = "table_id")
-    private DiningTablePOJO tableForRoom;
+    private DiningTablePOJO diningTable;
 
 }

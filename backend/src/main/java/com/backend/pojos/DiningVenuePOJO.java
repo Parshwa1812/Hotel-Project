@@ -38,11 +38,14 @@ public class DiningVenuePOJO{
     @Column(name = "accomodation_count")
     private Long accomodationCount;
 
-    @Column(name = "dining_venue_type")
-    @Enumerated(EnumType.STRING)
-    private DiningVenueType diningVenueType;
+    // @Column(name = "dining_venue_type")
+    // @Enumerated(EnumType.STRING)
+    // private DiningVenueType diningVenueType;
 
-    @OneToMany(mappedBy = "diningVenue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DiningTablePOJO> diningTables = new ArrayList<>();
+    @Column(name = "room_image")
+    private byte[] roomImage;
+
+    // @OneToMany(mappedBy = "diningVenue", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<DiningTablePOJO> diningTables = new ArrayList<>();
 
 }
