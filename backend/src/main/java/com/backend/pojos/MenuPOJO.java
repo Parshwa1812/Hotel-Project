@@ -47,15 +47,20 @@ public class MenuPOJO {
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
-    private VegorNonType category;
+    private VegorNonType mealChoice;
 
     @Column(name = "item_image")
     private byte[] itemImage;
 
-    @Column(name = "ingredients")
-    private String ingredients;
+    @ManyToMany( fetch = FetchType.LAZY)
+    @JoinTable(name = "item_ingredient", joinColumns = @JoinColumn(name = "item_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<IngredientPOJO> ingredients = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "item_order", joinColumns = @JoinColumn(name = "item_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
     private Set<OrderPOJO> orders = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryPOJO category;
 }
