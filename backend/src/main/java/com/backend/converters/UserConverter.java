@@ -10,7 +10,7 @@ import com.backend.converters.interfaces.IUserConverter;
 import com.backend.daos.IAddressDao;
 import com.backend.daos.IUserDAO;
 import com.backend.dtos.UserDTO;
-import com.backend.pojos.AddressPOJO;
+
 import com.backend.pojos.UserPOJO;
 
 @Component

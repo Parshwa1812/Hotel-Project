@@ -34,19 +34,11 @@ public class DiningTablePOJO{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tableId;
  
-    @ManyToOne
-    @JoinColumn(name = "table_type_id")
-    private TableTypePricePOJO tableType;
-
-    @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TableReservationPOJO> bookedTables =new ArrayList<>();
-
-    // @JoinColumn(name = "room_id")
     // @ManyToOne
-    // private DiningVenuePOJO diningVenue;
+    // @JoinColumn(name = "table_type_id")
+    // private TableTypePricePOJO tableType;
 
-    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    // @JoinTable(name = "tables_and_reservations", joinColumns = @JoinColumn(name = "table_id"), inverseJoinColumns = @JoinColumn(name = "reservation_id"))
-    // private List<TableReservationPOJO> reservedTables = new ArrayList<>();
+    // @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<TableReservationPOJO> bookedTables =new ArrayList<>();
 
 }

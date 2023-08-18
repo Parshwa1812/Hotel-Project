@@ -60,18 +60,20 @@ public class UserPOJO {
     // @JsonManagedReference
     private Set<AddressPOJO> addresses = new HashSet<AddressPOJO>();
 
-    public Boolean addAddress(AddressPOJO addressPOJO){
+    public Boolean addAddress(AddressPOJO addressPOJO) {
         addressPOJO.getUsers().add(this);
         return this.addresses.add(addressPOJO);
     }
 
-    public Boolean removeAddress(AddressPOJO addressPOJO){
+    public Boolean removeAddress(AddressPOJO addressPOJO) {
         addressPOJO.getUsers().remove(this);
         return this.addresses.remove(addressPOJO);
     }
 
     // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    // @JoinTable(name = "users_and_their_reservations", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "reservation_id"))
+    // @JoinTable(name = "users_and_their_reservations", joinColumns =
+    // @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name =
+    // "reservation_id"))
     // private Set<TableReservationPOJO> usersReservedTables = new HashSet<>();
 
     @Column(name = "reg_date")
@@ -88,6 +90,16 @@ public class UserPOJO {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TableReservationPOJO> reservedTables = new ArrayList<>();
+
+    public void addTableReservation(TableReservationPOJO tableReservationPOJO) {
+        reservedTables.add(tableReservationPOJO);// parent --> child link
+        tableReservationPOJO.setUser(this);// child --> parent
+    }
+
+    public void removeTableReservation(TableReservationPOJO tableReservationPOJO) {
+        reservedTables.remove(tableReservationPOJO);// parent --> child link
+        tableReservationPOJO.setUser(null);// child ---X---> parent
+    }
 
     private String toStr() {
         return "UserPOJO [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role

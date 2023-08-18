@@ -3,6 +3,8 @@ package com.backend.converters;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.backend.converters.interfaces.ITableTypePriceConverter;
@@ -12,16 +14,13 @@ import com.backend.pojos.TableTypePricePOJO;
 @Component
 public class TableTypePriceConverter implements ITableTypePriceConverter{
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public TableTypePricePOJO dtoToPojo(TableTypePriceDTO tableTypePriceDTO) {
-        TableTypePricePOJO tableTypePricePOJO=new TableTypePricePOJO();
-        tableTypePricePOJO.setTableTypeId(tableTypePriceDTO.getTableTypeId());
-        tableTypePricePOJO.setAvailableTables(tableTypePriceDTO.getAvailableTables());
-        tableTypePricePOJO.setPrice(tableTypePriceDTO.getPrice());
-        tableTypePricePOJO.setSeats(tableTypePriceDTO.getSeats());
-        tableTypePricePOJO.setTableImage(tableTypePriceDTO.getTableImage());
-        tableTypePricePOJO.setTableType(tableTypePriceDTO.getTableType());
-        return tableTypePricePOJO;
+        
+        return modelMapper.map(tableTypePriceDTO, TableTypePricePOJO.class);
 
     }
 
@@ -32,14 +31,9 @@ public class TableTypePriceConverter implements ITableTypePriceConverter{
 
     @Override
     public TableTypePriceDTO pojoToDto(TableTypePricePOJO tableTypePricePOJO) {
-         TableTypePriceDTO tableTypePriceDTO=new TableTypePriceDTO();
-        tableTypePriceDTO.setTableTypeId(tableTypePriceDTO.getTableTypeId());
-        tableTypePriceDTO.setAvailableTables(tableTypePriceDTO.getAvailableTables());
-        tableTypePriceDTO.setPrice(tableTypePriceDTO.getPrice());
-        tableTypePriceDTO.setSeats(tableTypePriceDTO.getSeats());
-        tableTypePriceDTO.setTableImage(tableTypePriceDTO.getTableImage());
-        tableTypePriceDTO.setTableType(tableTypePriceDTO.getTableType());
-        return tableTypePriceDTO;
+        //  TableTypePriceDTO tableTypePriceDTO=new TableTypePriceDTO();
+
+        return modelMapper.map(tableTypePricePOJO, TableTypePriceDTO.class);
         
     }
 

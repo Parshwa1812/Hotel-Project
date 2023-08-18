@@ -13,12 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Component
 public class TableTypePriceDTO {
-    private Long tableTypeId;
+   
     private TableType tableType;
     private Double price;
     private byte[] tableImage;
-    private Long seats;
+    private Long totalTables;
     private Long availableTables;
-
-    
 }

@@ -43,12 +43,27 @@ public class TableTypePricePOJO {
     @Column(name = "table_image")
     private byte[] tableImage;
     
-    @Column(name = "seats")
-    private Long seats;
+    @Column(name = "total_tables")
+    private Long totalTables;
 
     @Column(name = "available_tables")
     private Long availableTables;
 
-    @OneToMany(mappedBy = "tableType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DiningTablePOJO> tables = new ArrayList<>();
+    @OneToMany(mappedBy = "reservedTableType", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TableReservationPOJO> bookedTables =new ArrayList<>();
+
+    // @OneToMany(mappedBy = "tableType", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<DiningTablePOJO> tables = new ArrayList<>();
+
+    public void addTableReservation(TableReservationPOJO tableReservationPOJO) {
+        bookedTables.add(tableReservationPOJO);// parent --> child link
+        tableReservationPOJO.setReservedTableType(this);// child --> parent
+    }
+
+    public void removeTableReservation(TableReservationPOJO tableReservationPOJO) {
+        bookedTables.remove(tableReservationPOJO);// parent --> child link
+        tableReservationPOJO.setReservedTableType(null);// child ---X---> parent
+    }
+
+
 }

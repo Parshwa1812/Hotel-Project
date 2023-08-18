@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,15 +31,18 @@ public class TableReservationPOJO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
 
+    @Column(name = "start_time")
     private LocalDateTime startTime;
+    
+    // @Column(name = "end_time")
     // private LocalDateTime endTime;
-
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserPOJO user;
 
     @ManyToOne
-    @JoinColumn(name = "table_id")
-    private DiningTablePOJO diningTable;
+    @JoinColumn(name = "table_type_id")
+    private TableTypePricePOJO reservedTableType;
 
 }
