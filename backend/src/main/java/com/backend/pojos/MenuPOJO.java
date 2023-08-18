@@ -1,14 +1,22 @@
 package com.backend.pojos;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 
 import com.backend.pojos.enums.VegorNonType;
 
@@ -28,7 +36,7 @@ public class MenuPOJO {
     @Column(name = "item_id")
     private Long itemId;
 
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Long userid;
 
     @Column(name = "item_name")
@@ -38,15 +46,16 @@ public class MenuPOJO {
     private double price;
 
     @Column(name = "category")
-     @Enumerated(EnumType.STRING)
-     private VegorNonType category ;
+    @Enumerated(EnumType.STRING)
+    private VegorNonType category;
 
-     @Column(name = "item_image" )
-     private byte [] itemImage;
+    @Column(name = "item_image")
+    private byte[] itemImage;
 
-     @Column(name = "ingredients")
-     private String ingredients;
+    @Column(name = "ingredients")
+    private String ingredients;
 
-
-    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "item_order", joinColumns = @JoinColumn(name = "item_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<OrderPOJO> orders = new HashSet<>();
 }

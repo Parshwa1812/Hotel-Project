@@ -70,12 +70,6 @@ public class UserPOJO {
         return this.addresses.remove(addressPOJO);
     }
 
-    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    // @JoinTable(name = "users_and_their_reservations", joinColumns =
-    // @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name =
-    // "reservation_id"))
-    // private Set<TableReservationPOJO> usersReservedTables = new HashSet<>();
-
     @Column(name = "reg_date")
     private LocalDate registeredDate = LocalDate.now();
 
@@ -91,14 +85,17 @@ public class UserPOJO {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TableReservationPOJO> reservedTables = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderPOJO> orders = new HashSet<>();
+
     public void addTableReservation(TableReservationPOJO tableReservationPOJO) {
-        reservedTables.add(tableReservationPOJO);// parent --> child link
-        tableReservationPOJO.setUser(this);// child --> parent
+        reservedTables.add(tableReservationPOJO);
+        tableReservationPOJO.setUser(this);
     }
 
     public void removeTableReservation(TableReservationPOJO tableReservationPOJO) {
-        reservedTables.remove(tableReservationPOJO);// parent --> child link
-        tableReservationPOJO.setUser(null);// child ---X---> parent
+        reservedTables.remove(tableReservationPOJO);
+        tableReservationPOJO.setUser(null);
     }
 
     private String toStr() {
