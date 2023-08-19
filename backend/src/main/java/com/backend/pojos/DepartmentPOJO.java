@@ -33,4 +33,16 @@ public class DepartmentPOJO {
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmployeePOJO> employees = new ArrayList<>();
 
+
+    public void addEmployees(EmployeePOJO employeePOJO) {
+        employees.add(employeePOJO);// parent --> child link
+        employeePOJO.setDepartment(this);// child --> parent
+    }
+
+    public void removeEmoloyees(EmployeePOJO employeePOJO) {
+        employees.remove(employeePOJO);// parent --> child link
+        employeePOJO.setDepartment(null);// child ---X---> parent
+    }
+
+
 }
