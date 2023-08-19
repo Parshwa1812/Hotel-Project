@@ -13,9 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.backend.pojos.enums.IngredientType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,7 @@ public class IngredientPOJO {
     private Long ingredientId;
 
     @Column(name = "ingredient")
-    private IngredientType ingredient;
+    private String ingredient;
 
     @Column(name = "inventory_capacity")
     private Long inventoryCapacity;
@@ -42,7 +41,8 @@ public class IngredientPOJO {
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
     private Set<MenuPOJO> items = new HashSet<>();
 
-
-    // private SupplierPOJO supplier;  
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private SupplierPOJO supplier;  
 
 }

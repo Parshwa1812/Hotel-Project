@@ -1,5 +1,5 @@
 package com.backend.pojos.enums;
 
-public enum IngredientType {
+public enum ShopType {
 
 }
